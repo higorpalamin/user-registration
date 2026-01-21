@@ -1,6 +1,6 @@
-package com.example.exceptions_demo.repository;
+package com.example.crud_users.repository;
 
-import com.example.exceptions_demo.entity.UserEntity;
+import com.example.crud_users.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

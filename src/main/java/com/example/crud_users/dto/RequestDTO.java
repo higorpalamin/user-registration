@@ -1,4 +1,4 @@
-package com.example.exceptions_demo.dto;
+package com.example.crud_users.dto;
 
 public record RequestDTO(
 

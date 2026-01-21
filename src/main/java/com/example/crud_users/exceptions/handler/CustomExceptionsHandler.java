@@ -1,9 +1,9 @@
-package com.example.exceptions_demo.exceptions.handler;
+package com.example.crud_users.exceptions.handler;
 
-import com.example.exceptions_demo.exceptions.CpfAlreadyExistsException;
-import com.example.exceptions_demo.exceptions.EmailNotFoundException;
-import com.example.exceptions_demo.exceptions.IdNotFoundException;
-import com.example.exceptions_demo.exceptions.EmailAlreadyExistsException;
+import com.example.crud_users.exceptions.CpfAlreadyExistsException;
+import com.example.crud_users.exceptions.EmailNotFoundException;
+import com.example.crud_users.exceptions.IdNotFoundException;
+import com.example.crud_users.exceptions.EmailAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

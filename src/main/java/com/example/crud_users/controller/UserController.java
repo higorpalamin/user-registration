@@ -1,9 +1,9 @@
-package com.example.exceptions_demo.controller;
+package com.example.crud_users.controller;
 
-import com.example.exceptions_demo.dto.RequestDTO;
-import com.example.exceptions_demo.dto.ResponseDTO;
-import com.example.exceptions_demo.dto.ResponseUpdateDTO;
-import com.example.exceptions_demo.service.UserService;
+import com.example.crud_users.dto.RequestDTO;
+import com.example.crud_users.dto.ResponseDTO;
+import com.example.crud_users.dto.ResponseUpdateDTO;
+import com.example.crud_users.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

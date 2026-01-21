@@ -1,13 +1,13 @@
-package com.example.exceptions_demo.service;
+package com.example.crud_users.service;
 
-import com.example.exceptions_demo.dto.RequestDTO;
-import com.example.exceptions_demo.dto.ResponseDTO;
-import com.example.exceptions_demo.dto.ResponseUpdateDTO;
-import com.example.exceptions_demo.entity.UserEntity;
-import com.example.exceptions_demo.exceptions.CpfAlreadyExistsException;
-import com.example.exceptions_demo.exceptions.EmailAlreadyExistsException;
-import com.example.exceptions_demo.exceptions.IdNotFoundException;
-import com.example.exceptions_demo.repository.UserRepository;
+import com.example.crud_users.dto.RequestDTO;
+import com.example.crud_users.dto.ResponseDTO;
+import com.example.crud_users.dto.ResponseUpdateDTO;
+import com.example.crud_users.entity.UserEntity;
+import com.example.crud_users.exceptions.CpfAlreadyExistsException;
+import com.example.crud_users.exceptions.EmailAlreadyExistsException;
+import com.example.crud_users.exceptions.IdNotFoundException;
+import com.example.crud_users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.exceptions_demo.entity;
+package com.example.crud_users.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

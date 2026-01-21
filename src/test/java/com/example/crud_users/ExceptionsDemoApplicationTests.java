@@ -1,4 +1,4 @@
-package com.example.exceptions_demo;
+package com.example.crud_users;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
