@@ -1,4 +1,4 @@
-package com.example.crud_users.dto;
+package com.example.crud_users.api.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

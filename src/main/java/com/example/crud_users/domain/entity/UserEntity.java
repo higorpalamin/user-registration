@@ -1,4 +1,4 @@
-package com.example.crud_users.entity;
+package com.example.crud_users.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,10 +21,10 @@ public class UserEntity {
     private String firstName;
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String cpf;
 
     LocalDateTime createDateTime;

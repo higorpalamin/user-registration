@@ -1,9 +1,9 @@
-package com.example.crud_users.controller;
+package com.example.crud_users.api.controller;
 
-import com.example.crud_users.dto.RequestDTO;
-import com.example.crud_users.dto.ResponseDTO;
-import com.example.crud_users.dto.ResponseUpdateDTO;
-import com.example.crud_users.service.UserService;
+import com.example.crud_users.api.dto.RequestDTO;
+import com.example.crud_users.api.dto.ResponseDTO;
+import com.example.crud_users.api.dto.ResponseUpdateDTO;
+import com.example.crud_users.domain.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<ResponseDTO> save(@RequestBody @Valid RequestDTO request){
+    public ResponseEntity<ResponseDTO> save(@Valid @RequestBody RequestDTO request){
         ResponseDTO response = userService.saveUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
