@@ -2,7 +2,7 @@ package com.example.crud_users.api.controller;
 
 import com.example.crud_users.api.dto.RequestDTO;
 import com.example.crud_users.api.dto.ResponseDTO;
-import com.example.crud_users.api.dto.ResponseUpdateDTO;
+import com.example.crud_users.api.dto.ResponseUpdatedDTO;
 import com.example.crud_users.domain.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,8 +26,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseDTO> findById(@RequestParam UUID uuid){
+    @GetMapping("/{uuid}")
+    public ResponseEntity<ResponseDTO> findById(@PathVariable("uuid") UUID uuid){
         ResponseDTO response = userService.findById(uuid);
         return ResponseEntity.ok(response);
     }
@@ -36,11 +37,15 @@ public class UserController {
         userService.deleteUserById(uuid);
         return ResponseEntity.ok().build();
     }
+    @GetMapping
+    public ResponseEntity<List<ResponseUpdatedDTO>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAll());
+    }
 
     @PutMapping
-    public ResponseEntity<ResponseUpdateDTO> updateUserByEmail(@RequestParam UUID uuid,
-                                                               @RequestBody RequestDTO update){
-        ResponseUpdateDTO response = userService.updateUserById(uuid, update);
+    public ResponseEntity<ResponseUpdatedDTO> updateUserByEmail(@RequestParam UUID uuid,
+                                                                @RequestBody RequestDTO update){
+        ResponseUpdatedDTO response = userService.updateUserById(uuid, update);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 }

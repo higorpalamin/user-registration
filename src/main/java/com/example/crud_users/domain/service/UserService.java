@@ -2,8 +2,9 @@ package com.example.crud_users.domain.service;
 
 import com.example.crud_users.api.dto.RequestDTO;
 import com.example.crud_users.api.dto.ResponseDTO;
-import com.example.crud_users.api.dto.ResponseUpdateDTO;
+import com.example.crud_users.api.dto.ResponseUpdatedDTO;
 import com.example.crud_users.api.dto.mapstruct.UserMapper;
+import com.example.crud_users.api.dto.mapstruct.UserUpdateMapper;
 import com.example.crud_users.domain.entity.UserEntity;
 import com.example.crud_users.exceptions.CpfAlreadyExistsException;
 import com.example.crud_users.exceptions.EmailAlreadyExistsException;
@@ -12,7 +13,7 @@ import com.example.crud_users.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,6 +24,9 @@ public class UserService {
 
     @Autowired
     private UserMapper mapper;
+
+    @Autowired
+    private UserUpdateMapper updateMapper;
 
     public ResponseDTO saveUser(RequestDTO request) {
 
@@ -43,7 +47,20 @@ public class UserService {
         UserEntity UUIDtoResponse = userRepository.findById(uuid)
                 .orElseThrow(() -> new IdNotFoundException());
 
-        return toResponseDTO(UUIDtoResponse);
+        return mapper.toResponseDTO(UUIDtoResponse);
+    }
+
+    public ResponseUpdatedDTO updateUserById(UUID uuid, RequestDTO request) {
+        UserEntity entity = userRepository.findById(uuid)
+                .orElseThrow(() -> new IdNotFoundException()
+                );
+
+        UserEntity toEntity = updateMapper.updateUser(request, entity);
+        return mapper.toResponseUpdateDTO(userRepository.saveAndFlush(toEntity));
+    }
+
+    public List<ResponseUpdatedDTO> getAll(){
+        return mapper.toListUsers(userRepository.findAll());
     }
 
     public void deleteUserById(UUID uuid) {
@@ -52,46 +69,6 @@ public class UserService {
             throw new IdNotFoundException();
         }
         userRepository.deleteById(uuid);
-    }
-
-    public ResponseUpdateDTO updateUserById(UUID uuid, RequestDTO request) {
-        UserEntity var = userRepository.findById(uuid)
-                .orElseThrow(() -> new IdNotFoundException()
-                );
-
-        UserEntity toUpdate = UserEntity.builder()
-                .id(var.getId())
-                .firstName(request.firstName() != null ? request.firstName() : var.getFirstName())
-                .lastName(request.lastName() != null ? request.lastName() : var.getLastName())
-                .email(var.getEmail())
-                .cpf(request.cpf() != null ? request.cpf() : var.getCpf())
-                .updateDateTime(LocalDateTime.now())
-                .build();
-
-        UserEntity updatedUser = userRepository.saveAndFlush(toUpdate);
-        return toResponseUpdateDTO(updatedUser);
-    }
-
-    public ResponseDTO toResponseDTO(UserEntity toResponse) {
-        return new ResponseDTO(
-                toResponse.getId(),
-                toResponse.getFirstName(),
-                toResponse.getLastName(),
-                toResponse.getEmail(),
-                toResponse.getCpf(),
-                toResponse.getCreateDateTime()
-        );
-    }
-
-    public ResponseUpdateDTO toResponseUpdateDTO(UserEntity toResponse) {
-        return new ResponseUpdateDTO(
-                toResponse.getId(),
-                toResponse.getFirstName(),
-                toResponse.getLastName(),
-                toResponse.getEmail(),
-                toResponse.getCpf(),
-                toResponse.getUpdateDateTime()
-        );
     }
 
 }
