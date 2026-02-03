@@ -6,9 +6,7 @@ import com.example.crud_users.api.dto.ResponseUpdatedDTO;
 import com.example.crud_users.api.dto.mapstruct.UserMapper;
 import com.example.crud_users.api.dto.mapstruct.UserUpdateMapper;
 import com.example.crud_users.domain.entity.UserEntity;
-import com.example.crud_users.exceptions.CpfAlreadyExistsException;
-import com.example.crud_users.exceptions.EmailAlreadyExistsException;
-import com.example.crud_users.exceptions.IdNotFoundException;
+import com.example.crud_users.exceptions.*;
 import com.example.crud_users.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +52,12 @@ public class UserService {
         UserEntity entity = userRepository.findById(uuid)
                 .orElseThrow(() -> new IdNotFoundException()
                 );
+        if(request.cpf() != null){
+            throw new CpfCannotBeChangedException();
+        }
+        if(request.email() != null){
+            throw new EmailCannotBeChangedException();
+        }
 
         UserEntity toEntity = updateMapper.updateUser(request, entity);
         return mapper.toResponseUpdateDTO(userRepository.saveAndFlush(toEntity));
